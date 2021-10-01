@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-
+using UnityEngine.SceneManagement;
 public class ARCursor : MonoBehaviour
 {
     public GameObject cursorChildObject;
     public GameObject objectToPlace;
     public ARRaycastManager raycastManager;
-
     public bool useCursor = true;
-
+    public Scene gameScene;
     void Start()
     {
         cursorChildObject.SetActive(useCursor);

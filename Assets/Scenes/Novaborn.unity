@@ -968,6 +968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorChildObject: {fileID: 333424952}
-  objectToPlace: {fileID: 4020983980232809014, guid: 9fedecbd1aa68924b816f15cb97e611a, type: 3}
+  objectToPlace: {fileID: 743375675836265082, guid: 5601f4aa9c4e382288494dd96048645d, type: 3}
   raycastManager: {fileID: 317706037}
   useCursor: 1
+  gameScene:
+    m_Handle: 0
