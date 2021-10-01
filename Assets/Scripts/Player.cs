@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         jDown = Input.GetButton("Jump");
     }
         
-    void Move()
+     public void Move()
     {
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
