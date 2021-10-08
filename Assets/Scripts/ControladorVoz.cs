@@ -4,76 +4,71 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+
 using static SpeechRecognizerPlugin;
 
 public class ControladorVoz : MonoBehaviour
 {
-
-
-    public UnityEvent avanza;
-    public UnityEvent derecha;
-    public UnityEvent izquierda;
-    public UnityEvent atras;
+    private Player script_personaje;
     public GameObject personaje;
-
+    public float cantidadMoverse;
+    public float cantidadSaltar;
     private SpeechRecognizerPlugin plugin = null;
-    // Start is called before the first frame update
-    /*
-        "avanza",new Vector3Int(0,0,-100) );
-        {"izquierda",new Vector3Int(0,-90,0) },
-        {"derecha",new Vector3Int(0,90,0) },
-        {"atrás",new Vector3Int(0,180,0) },
-     */
+    public Text uiTexto;
     void Start()
     {
+        uiTexto.text = personaje.transform.position.ToString();
+        //script Player
+        script_personaje = personaje.GetComponent<Player>();
+        //plugin
         plugin = SpeechRecognizerPlugin.GetPlatformPluginVersion(this.gameObject.name);
         //configuraciones
         plugin.SetLanguageForNextRecognition("es-ES");
-        plugin.SetMaxResultsForNextRecognition(1);
+        plugin.SetMaxResultsForNextRecognition(2);
         plugin.SetContinuousListening(true);
-
-        // startListeningBtn.onClick.AddListener(StartListening);
-        //stopListeningBtn.onClick.AddListener(StopListening);
-        //continuousListeningTgle.onValueChanged.AddListener(SetContinuousListening); ok 
-        ///languageDropdown.onValueChanged.AddListener(SetLanguage); ok
-        //maxResultsInputField.onEndEdit.AddListener(SetMaxResults); ok
         plugin.StartListening();
+    }
+    private void Update()
+    {
+        
+        uiTexto.text = personaje.transform.position.ToString();
     }
     private void OnDestroy()
     {
-        plugin.StopListening();
+        plugin.StopListening(); 
     }
     public void OnResult(string recognizedResult)
     {
         char[] delimiterChars = { '~' };
         string[] result = recognizedResult.Split(delimiterChars);
 
-        //resultsTxt.text = "";
         for (int i = 0; i < result.Length; i++)
         {
             switch (result[i]) {
                 case "avanza":
-                    avanza?.Invoke();
-                    personaje.transform.Translate(0, 0,2);
+                    uiTexto.text = "Avanza";
+                    script_personaje.objetivoMoverse =new Vector3(0,0,cantidadMoverse);
+                    script_personaje.estado = 'M';
                     break;
                 case "izquierda":
-                    izquierda?.Invoke();
+                    uiTexto.text = "Izquierda";
                     personaje.transform.Rotate(0,-90,0);
                     break;
                 case "derecha":
-                    derecha?.Invoke();
+                    uiTexto.text = "Derecha";
                     personaje.transform.Rotate(0, 90, 0);
                     break;
                 case "atrás":
-                    atras?.Invoke();
+                    uiTexto.text = "Atrás";
                     personaje.transform.Rotate(0, 180, 0);
                     break;
+                case "salta":
+                    uiTexto.text = "Salta";
+                    script_personaje.objetivoMoverse = new Vector3(0, 0, cantidadMoverse);
+                    script_personaje.objetivoSaltar = new Vector3(0, cantidadSaltar, 0);
+                    script_personaje.estado = 'S';
+                    break;
             }
-            //resultsTxt.text += result[i] + '\n';
         }
     }
-    public void mover1() {
-        transform.Translate(0,20,0);
-    }
-
 }
