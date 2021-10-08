@@ -22,7 +22,7 @@ public class ControladorVoz : MonoBehaviour
         "avanza",new Vector3Int(0,0,-100) );
         {"izquierda",new Vector3Int(0,-90,0) },
         {"derecha",new Vector3Int(0,90,0) },
-        {"atrás",new Vector3Int(0,180,0) },
+        {"atrï¿½s",new Vector3Int(0,180,0) },
      */
     void Start()
     {
@@ -54,7 +54,7 @@ public class ControladorVoz : MonoBehaviour
             switch (result[i]) {
                 case "avanza":
                     avanza?.Invoke();
-                    personaje.transform.Translate(0, 0,2);
+                    personaje.transform.Translate(0, 0,002);
                     break;
                 case "izquierda":
                     izquierda?.Invoke();
@@ -64,7 +64,7 @@ public class ControladorVoz : MonoBehaviour
                     derecha?.Invoke();
                     personaje.transform.Rotate(0, 90, 0);
                     break;
-                case "atrás":
+                case "atrï¿½s":
                     atras?.Invoke();
                     personaje.transform.Rotate(0, 180, 0);
                     break;
