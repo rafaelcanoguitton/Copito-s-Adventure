@@ -49,12 +49,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        /*
         GetInput();
         Move();
         Turn();
         Jump();
         Atack();
         Swap();
+        */
         //
         moverse();
         saltar();
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
         }
         if (estado == 'c')
         {
-            if (transform.position != objetivoMoverse)
+            if (transform.position.x != objetivoMoverse.x && transform.position.z != objetivoMoverse.z)
             {
                 transform.position = Vector3.MoveTowards(transform.position,
                     objetivoMoverse, speed * Time.deltaTime);
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
-
+    #region Movimiento por teclado
     void GetInput()
     {
         hAxis = Input.GetAxisRaw("Horizontal");
@@ -153,7 +155,7 @@ public class Player : MonoBehaviour
             isJump = true;
         }
     }
-
+    #endregion
     void Atack()
     {
         if (equipWeapon == null)
