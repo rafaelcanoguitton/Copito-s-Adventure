@@ -12,7 +12,6 @@ public class ControladorVoz : MonoBehaviour
     private Player script_personaje;
     public GameObject personaje;
     public float cantidadMoverse;
-    public float cantidadSaltar;
     private SpeechRecognizerPlugin plugin = null;
     //public Text uiTexto;
     void Start()
@@ -65,7 +64,6 @@ public class ControladorVoz : MonoBehaviour
                 case "salta":
                     //uiTexto.text = "Salta";
                     script_personaje.objetivoMoverse = new Vector3(0, 0, cantidadMoverse);
-                    script_personaje.objetivoSaltar = new Vector3(0, cantidadSaltar, 0);
                     script_personaje.estado = 'S';
                     break;
             }

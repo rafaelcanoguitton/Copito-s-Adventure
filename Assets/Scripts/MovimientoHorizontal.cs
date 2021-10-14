@@ -7,6 +7,8 @@ public class MovimientoHorizontal : MonoBehaviour
     enum Directions{ x, y, z }
     [SerializeField]
     private Directions eje;
+    [SerializeField]
+    private GameObject Jugador;
     private Vector3[] vectorDirecciones=new Vector3[2];
     private int direccion = 1;
     public float speed = 0.1f;
@@ -36,10 +38,26 @@ public class MovimientoHorizontal : MonoBehaviour
     {
         transform.Translate(vectorDirecciones[direccion] * Time.deltaTime);
     }
+    /*
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == Jugador) {
+            Jugador.transform.parent = transform;
+        }
+    }
+    private void OntriggerExit(Collider other)
+    {
+        if (other.gameObject == Jugador)
+        {
+            Jugador.transform.parent = null;
+        }
+    }
+    */
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("collision");
         direccion++;
         direccion = direccion % 2;
     }
+    
 }
