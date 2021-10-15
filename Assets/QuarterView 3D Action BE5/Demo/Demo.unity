@@ -502,7 +502,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personaje: {fileID: 977604651}
   cantidadMoverse: 9
-  cantidadSaltar: 15
 --- !u!4 &914915604
 Transform:
   m_ObjectHideFlags: 0

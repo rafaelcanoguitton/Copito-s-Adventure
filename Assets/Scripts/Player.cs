@@ -197,6 +197,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Floor") {
+            Debug.Log("Floor");
             anim.SetBool("isJump", false);
             isJump = false;
         }
@@ -204,7 +205,11 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
+        if (other.tag == "Floor")
+        {
+            Debug.Log("Floor2");
+        }
+            if (other.tag == "Item")
         {
             Item item = other.GetComponent<Item>();
             switch (item.type) {
