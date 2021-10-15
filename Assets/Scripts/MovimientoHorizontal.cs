@@ -4,38 +4,60 @@ using UnityEngine;
 
 public class MovimientoHorizontal : MonoBehaviour
 {
+    enum Directions{ x, y, z }
+    [SerializeField]
+    private Directions eje;
+    [SerializeField]
+    private GameObject Jugador;
+    private Vector3[] vectorDirecciones=new Vector3[2];
+    private int direccion = 1;
     public float speed = 0.1f;
-    public Transform target;
-    private Vector3 initialPosition;
-    private Vector3 targetPosition;
+    Rigidbody rigid;
     void Start()
     {
-        initialPosition = transform.position;
-    }
 
+        rigid = GetComponent<Rigidbody>();
+
+        if (eje == Directions.z) {
+            vectorDirecciones[0] = new Vector3(0, 0, speed);
+            vectorDirecciones[1] = vectorDirecciones[0] * -1;
+        }
+        if (eje == Directions.x)
+        {
+            vectorDirecciones[0] = new Vector3(-speed, 0, 0);
+            vectorDirecciones[1] = vectorDirecciones[0] * -1;
+        }
+        if (eje == Directions.y)
+        {
+            vectorDirecciones[0] = new Vector3(0, -speed, 0);
+            vectorDirecciones[1] = vectorDirecciones[0] * -1;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        if (transform.position == target.position)
-        {
-            targetPosition = initialPosition;
-        }
-        if (transform.position == initialPosition)
-        {
-            targetPosition = target.position;
-        }
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
-
+        transform.Translate(vectorDirecciones[direccion] * Time.deltaTime);
     }
-    private void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("colisión xd ");
-        targetPosition = initialPosition;
-    }
+    /*
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("colisión xd ");
-        targetPosition = initialPosition;
+        if (other.gameObject == Jugador) {
+            Jugador.transform.parent = transform;
+        }
     }
+    private void OntriggerExit(Collider other)
+    {
+        if (other.gameObject == Jugador)
+        {
+            Jugador.transform.parent = null;
+        }
+    }
+    */
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("collision");
+        direccion++;
+        direccion = direccion % 2;
+    }
+    
 }

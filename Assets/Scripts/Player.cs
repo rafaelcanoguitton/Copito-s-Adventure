@@ -36,9 +36,8 @@ public class Player : MonoBehaviour
     float FireDelay;
     //CONTROL VOZ
     public Vector3 objetivoMoverse;
-    public Vector3 objetivoSaltar;
     public char estado = 'N';
-    public float initialAngle = 20;
+    public float angulo_salto = 90;
     void Awake()
     {
         weapon = new GameObject[2];
@@ -49,12 +48,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        
         GetInput();
         Move();
         Turn();
         Jump();
         Atack();
         Swap();
+        
         //
         moverse();
         saltar();
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
         }
         if (estado == 'c')
         {
-            if (transform.position != objetivoMoverse)
+            if (transform.position.x != objetivoMoverse.x && transform.position.z != objetivoMoverse.z)
             {
                 transform.position = Vector3.MoveTowards(transform.position,
                     objetivoMoverse, speed * Time.deltaTime);
@@ -88,9 +89,9 @@ public class Player : MonoBehaviour
 
         if (estado == 'S')
         {
-            objetivoMoverse = transform.position +
-                transform.TransformDirection(objetivoMoverse);
-            rigid.velocity = BallisticVelocity(objetivoMoverse, 80.0f);
+            objetivoMoverse = transform.position + transform.TransformDirection(objetivoMoverse*2);
+
+            rigid.velocity = BallisticVelocity(objetivoMoverse, angulo_salto);
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
             estado = 'N';
@@ -100,22 +101,20 @@ public class Player : MonoBehaviour
 
     private Vector3 BallisticVelocity(Vector3 destination, float angle)
     {
-        Vector3 dir = destination - transform.position; // get Target Direction
-        float height = dir.y; // get height difference
-        dir.y = 0; // retain only the horizontal difference
-        float dist = dir.magnitude; // get horizontal direction
-        float a = angle * Mathf.Deg2Rad; // Convert angle to radians
-        dir.y = dist * Mathf.Tan(a); // set dir to the elevation angle.
-        dist += height / Mathf.Tan(a); // Correction for small height differences
-
-        // Calculate the velocity magnitude
+        Vector3 dir = destination - transform.position; 
+        float height = dir.y; 
+        dir.y = 0; 
+        float dist = dir.magnitude; 
+        float a = angle * Mathf.Deg2Rad; 
+        dir.y = dist * Mathf.Tan(a); 
+        dist += height / Mathf.Tan(a); 
         float velocity = Mathf.Sqrt(dist * Physics.gravity.magnitude / Mathf.Sin(2 * a));
-        return velocity * dir.normalized; // Return a normalized vector.
+        return velocity * dir.normalized; 
     }
 
     #endregion
 
-
+    #region Movimiento por teclado
     void GetInput()
     {
         hAxis = Input.GetAxisRaw("Horizontal");
@@ -147,13 +146,13 @@ public class Player : MonoBehaviour
     void Jump()
     {
         if (jDown && !isJump && !isSwap) {
-            rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * 7, ForceMode.Impulse);
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
             isJump = true;
         }
     }
-
+    #endregion
     void Atack()
     {
         if (equipWeapon == null)
@@ -198,6 +197,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Floor") {
+            Debug.Log("Floor");
             anim.SetBool("isJump", false);
             isJump = false;
         }
@@ -205,7 +205,11 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
+        if (other.tag == "Floor")
+        {
+            Debug.Log("Floor2");
+        }
+            if (other.tag == "Item")
         {
             Item item = other.GetComponent<Item>();
             switch (item.type) {
