@@ -14,5 +14,4 @@ public class PausaScript : MonoBehaviour
     public void OnSalirClick(){
         SceneManager.LoadScene("Menu Principal");
     }
-    
 }
