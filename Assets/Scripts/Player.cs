@@ -6,25 +6,26 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public GameObject[] weapon;
-    public bool[] hasWeapon;
+    private bool[] hasWeapon;
 
     public int ammo;
     public int coin;
-    public int health;
-
-    public int maxAmmo;
-    public int maxCoin;
-    public int maxHealth;
+    public int health = 3;
+    public int maxAmmo = 3;
+    public int maxCoin = 999;
+    public int maxHealth = 3;
 
     float hAxis; float vAxis;
 
     bool wDown; bool jDown;
-    bool sDown1; bool sDown2;
-    bool fDown;
+    public bool fDown=false;
+    public bool sDown1=false; 
+    public bool sDown2=false;
 
     bool isJump;
     bool isSwap;
     bool isFireReady;
+    //bool isBorder;
 
     Vector3 moveVec;
 
@@ -34,31 +35,29 @@ public class Player : MonoBehaviour
     GameObject nearObject;
     Weapon equipWeapon;
     float FireDelay;
-    //CONTROL VOZ
+    //control voz
     public Vector3 objetivoMoverse;
     public char estado = 'N';
-    public float angulo_salto = 90;
+    public float angulo_salto;
     void Awake()
     {
-        weapon = new GameObject[2];
-        hasWeapon = new bool[2];
+        hasWeapon = new bool[2] { false, false };
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        
         GetInput();
         Move();
         Turn();
         Jump();
         Atack();
         Swap();
-        
-        //
+        //control voz
         moverse();
         saltar();
+
     }
     #region Movimiento por voz
     private void moverse()
@@ -89,7 +88,7 @@ public class Player : MonoBehaviour
 
         if (estado == 'S')
         {
-            objetivoMoverse = transform.position + transform.TransformDirection(objetivoMoverse*2);
+            objetivoMoverse = transform.position + transform.TransformDirection(objetivoMoverse * 2);
 
             rigid.velocity = BallisticVelocity(objetivoMoverse, angulo_salto);
             anim.SetBool("isJump", true);
@@ -101,30 +100,32 @@ public class Player : MonoBehaviour
 
     private Vector3 BallisticVelocity(Vector3 destination, float angle)
     {
-        Vector3 dir = destination - transform.position; 
-        float height = dir.y; 
-        dir.y = 0; 
-        float dist = dir.magnitude; 
-        float a = angle * Mathf.Deg2Rad; 
-        dir.y = dist * Mathf.Tan(a); 
-        dist += height / Mathf.Tan(a); 
+        Vector3 dir = destination - transform.position;
+        float height = dir.y;
+        dir.y = 0;
+        float dist = dir.magnitude;
+        float a = angle * Mathf.Deg2Rad;
+        dir.y = dist * Mathf.Tan(a);
+        dist += height / Mathf.Tan(a);
         float velocity = Mathf.Sqrt(dist * Physics.gravity.magnitude / Mathf.Sin(2 * a));
-        return velocity * dir.normalized; 
+        return velocity * dir.normalized;
     }
 
     #endregion
 
-    #region Movimiento por teclado
     void GetInput()
     {
+        
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
         jDown = Input.GetButton("Jump");
-        fDown = Input.GetButton("Fire1");
-        sDown1 = Input.GetButton("Swap1");
-        sDown2 = Input.GetButton("Swap2");
-    }
+
+        fDown = Input.GetButton("Fire1");//ataca
+        sDown1 = Input.GetButton("Swap1");//martillo
+        sDown2 = Input.GetButton("Swap2");//pistola
         
+    }
+
     void Move()
     {
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
@@ -132,27 +133,30 @@ public class Player : MonoBehaviour
         if (isSwap)
             moveVec = Vector3.zero;
 
-        transform.position += moveVec* speed * Time.deltaTime;
+        //if (!isBorder)
+        transform.position += moveVec * speed * Time.deltaTime;
 
         anim.SetBool("isRun", moveVec != Vector3.zero);
     }
-    
-        
-    void Turn() 
+
+
+    void Turn()
     {
         transform.LookAt(transform.position + moveVec);
     }
 
     void Jump()
     {
-        if (jDown && !isJump && !isSwap) {
-            rigid.AddForce(Vector3.up * 7, ForceMode.Impulse);
+        if (jDown && !isJump && !isSwap)
+        {
+            Debug.Log("Saltando");
+            rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
             isJump = true;
         }
     }
-    #endregion
+
     void Atack()
     {
         if (equipWeapon == null)
@@ -161,10 +165,15 @@ public class Player : MonoBehaviour
         FireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < FireDelay;
 
-        if(fDown && isFireReady && !isSwap){
-            equipWeapon.Use();
-            anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
-            FireDelay = 0;
+        if (fDown && isFireReady && !isSwap && !isJump)
+        {
+            if (equipWeapon.gameObject.activeInHierarchy == true)
+            {
+                equipWeapon.Use();
+                anim.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
+                FireDelay = 0;
+            }
+            fDown = false;
         }
     }
 
@@ -174,11 +183,13 @@ public class Player : MonoBehaviour
         if (sDown1) weaponIndex = 0;
         if (sDown2) weaponIndex = 1;
 
-        if ((sDown1 || sDown2) && !isJump) {
+        if ((sDown1 || sDown2) && !isJump)
+        {
             if (equipWeapon != null)
                 equipWeapon.gameObject.SetActive(false);
 
-            if (hasWeapon[weaponIndex] == true) {
+            if (hasWeapon[weaponIndex] == true)
+            {
                 equipWeapon = weapon[weaponIndex].GetComponent<Weapon>();
                 equipWeapon.gameObject.SetActive(true);
 
@@ -186,6 +197,8 @@ public class Player : MonoBehaviour
                 isSwap = true;
                 Invoke("SwapOut", 0.0f);
             }
+            sDown1 = false;
+            sDown2 = false;
         }
     }
 
@@ -194,9 +207,27 @@ public class Player : MonoBehaviour
         isSwap = false;
     }
 
+    void FreezeRotation()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+
+    /*void StopToWall()
+    {
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
+        isBorder = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("Wall"));
+    }*/
+
+    void fixedUpdate()
+    {
+        FreezeRotation();
+        //StopToWall();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Floor") {
+        if (collision.gameObject.tag == "Floor")
+        {
             Debug.Log("Floor");
             anim.SetBool("isJump", false);
             isJump = false;
@@ -205,14 +236,11 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Floor")
-        {
-            Debug.Log("Floor2");
-        }
-            if (other.tag == "Item")
+        if (other.tag == "Item")
         {
             Item item = other.GetComponent<Item>();
-            switch (item.type) {
+            switch (item.type)
+            {
                 case Item.Type.Coin:
                     coin += item.value;
                     if (coin > maxCoin)
@@ -238,5 +266,5 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+
 }

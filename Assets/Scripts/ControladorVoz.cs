@@ -45,26 +45,30 @@ public class ControladorVoz : MonoBehaviour
         {
             switch (result[i]) {
                 case "avanza":
-                    //uiTexto.text = "Avanza";
                     script_personaje.objetivoMoverse =new Vector3(0,0,cantidadMoverse);
                     script_personaje.estado = 'M';
                     break;
                 case "izquierda":
-                    //uiTexto.text = "Izquierda";
                     personaje.transform.Rotate(0,-90,0);
                     break;
                 case "derecha":
-                    //uiTexto.text = "Derecha";
                     personaje.transform.Rotate(0, 90, 0);
                     break;
                 case "atrás":
-                    //uiTexto.text = "Atrás";
                     personaje.transform.Rotate(0, 180, 0);
                     break;
                 case "salta":
-                    //uiTexto.text = "Salta";
                     script_personaje.objetivoMoverse = new Vector3(0, 0, cantidadMoverse);
                     script_personaje.estado = 'S';
+                    break;
+                case "ataca":
+                    script_personaje.fDown = true;
+                    break;
+                case "martillo":
+                    script_personaje.sDown1=true;
+                    break;
+                case "pistola":
+                    script_personaje.sDown2 = true;
                     break;
             }
         }

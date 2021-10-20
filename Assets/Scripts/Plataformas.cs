@@ -6,13 +6,13 @@ public class Plataformas : MonoBehaviour
 {
 
     [SerializeField]
-    float speed;
+    float speed=0.5f;
 
     [SerializeField]
     Transform startPoint, endPoint;
 
     [SerializeField]
-    float changeDirectionDelay;
+    float changeDirectionDelay=3.0f;
 
 
     private Transform destinationTarget, departTarget;
@@ -22,7 +22,6 @@ public class Plataformas : MonoBehaviour
     private float journeyLength;
 
     bool isWaiting;
-
 
 
     void Start()
@@ -43,7 +42,7 @@ public class Plataformas : MonoBehaviour
     private void Move()
     {
 
-
+        
         if (!isWaiting)
         {
             if (Vector3.Distance(transform.position, destinationTarget.position) > 0.01f)
@@ -88,13 +87,11 @@ public class Plataformas : MonoBehaviour
         isWaiting = false;
     }
 
-
-
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("col1");
             other.transform.parent = transform;
 
         }

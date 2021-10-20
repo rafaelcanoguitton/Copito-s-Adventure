@@ -38,7 +38,7 @@ public class MovimientoHorizontal : MonoBehaviour
     {
         transform.Translate(vectorDirecciones[direccion] * Time.deltaTime);
     }
-    /*
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == Jugador) {
@@ -52,12 +52,6 @@ public class MovimientoHorizontal : MonoBehaviour
             Jugador.transform.parent = null;
         }
     }
-    */
-    private void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("collision");
-        direccion++;
-        direccion = direccion % 2;
-    }
+
     
 }
