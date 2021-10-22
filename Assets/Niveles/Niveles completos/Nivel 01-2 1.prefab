@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2d6d6158b25a04286801c28f69e0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 0.8
   weapon:
   - {fileID: 6861144447381990828}
   - {fileID: 5339829843175740286}
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personaje: {fileID: 453612308803611096}
-  cantidadMoverse: 5
+  cantidadMoverse: 3
 --- !u!1 &1040951655438374735
 GameObject:
   m_ObjectHideFlags: 0
@@ -26424,7 +26424,7 @@ MonoBehaviour:
   type: 0
   maxHealth: 1
   currHealth: 1
-  speed: 2
+  speed: 0.8
   target: {fileID: 1017683638971295282}
 --- !u!1 &5700268395981788239
 GameObject:
