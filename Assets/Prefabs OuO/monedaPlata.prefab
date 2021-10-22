@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 541761845328708380}
   - component: {fileID: 7585594533464059972}
   - component: {fileID: 5198020907200847399}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6836362373565420289}
   - component: {fileID: 6836362373565420294}
   - component: {fileID: 6836362373565420288}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: monedaPlata
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6836362374715913880}
   - component: {fileID: 6836362374715913881}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

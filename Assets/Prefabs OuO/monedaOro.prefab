@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5498536942895525038}
   - component: {fileID: 5498536942895525039}
   - component: {fileID: 5498536942895525037}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: monedaOro
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6685041028788236467}
   - component: {fileID: 3605064341495022571}
   - component: {fileID: 1396578346140872072}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5498536943595853194}
   - component: {fileID: 5498536943595853195}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

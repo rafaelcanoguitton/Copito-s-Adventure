@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128886632121732780}
   - component: {fileID: 128886632121732781}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 128886633655220778}
   - component: {fileID: 128886633655220779}
   - component: {fileID: 128886633655220777}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: pistola
-  m_TagString: Weapon
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 1310580840053945718}
   - component: {fileID: 5544425266513333787}
   - component: {fileID: 5998135357068204818}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}

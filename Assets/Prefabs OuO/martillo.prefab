@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4084949326391419059}
   - component: {fileID: 1122737984578383324}
   - component: {fileID: 5228436408011945380}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8345625878602919587}
   - component: {fileID: 6817637334249791506}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,9 +187,9 @@ GameObject:
   - component: {fileID: 2319322894908120250}
   - component: {fileID: 2022662374396872055}
   - component: {fileID: 6455512769566742829}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: martillo
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
