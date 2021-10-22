@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personaje: {fileID: 453612308803611096}
-  cantidadMoverse: 3
+  cantidadMoverse: 1
 --- !u!1 &1040951655438374735
 GameObject:
   m_ObjectHideFlags: 0
