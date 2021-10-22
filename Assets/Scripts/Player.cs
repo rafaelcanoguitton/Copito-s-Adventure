@@ -265,6 +265,7 @@ public class Player : MonoBehaviour
         {
             Item item = other.GetComponent<Item>();
             int weaponIndex = item.value;
+            Debug.Log(item.value);
             hasWeapon[weaponIndex] = true;
             Destroy(other.gameObject);
         }
