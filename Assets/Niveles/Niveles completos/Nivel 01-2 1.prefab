@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2d6d6158b25a04286801c28f69e0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  speed: 0.3
   weapon:
   - {fileID: 6861144447381990828}
   - {fileID: 5339829843175740286}
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personaje: {fileID: 453612308803611096}
-  cantidadMoverse: 5
+  cantidadMoverse: 0.05
 --- !u!1 &1040951655438374735
 GameObject:
   m_ObjectHideFlags: 0
@@ -4870,7 +4870,7 @@ GameObject:
   - component: {fileID: 4706352760797274940}
   - component: {fileID: 4706352760797274941}
   m_Layer: 0
-  m_Name: Puente (1)
+  m_Name: Plataforma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5942,7 +5942,7 @@ GameObject:
   - component: {fileID: 5589313720406254842}
   - component: {fileID: 5589313720406254843}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: BOTON DE RAFA <3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5977,7 +5977,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5589313720406254841}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6038,7 +6038,7 @@ GameObject:
   - component: {fileID: 5589313721427484055}
   - component: {fileID: 5589313721427484052}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: INICIO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
