@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7010258383971509258}
   - component: {fileID: 7010258383971509259}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8348629260210298301}
   - component: {fileID: 3416250787834355529}
   - component: {fileID: 3267503498753448408}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 7010258384559380658}
   - component: {fileID: 7010258384559380659}
   - component: {fileID: 7010258384559380669}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Corazon
   m_TagString: Item
   m_Icon: {fileID: 0}
