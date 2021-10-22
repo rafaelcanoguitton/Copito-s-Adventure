@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     GameObject nearObject;
     Weapon equipWeapon;
     float FireDelay;
+
     //control voz
     public Vector3 objetivoMoverse;
     public char estado = 'N';
@@ -48,12 +49,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        /*
         GetInput();
         Move();
         Turn();
         Jump();
+        */
         Atack();
         Swap();
+
         //control voz
         moverse();
         saltar();
