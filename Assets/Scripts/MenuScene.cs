@@ -20,6 +20,7 @@ public class MenuScene : MonoBehaviour
     public void InitLevel(){
         int i=0;
         foreach(Transform t in levelPanel){
+            Debug.Log("Tres veces.");
             Button b=t.GetComponent<Button>();
             b.onClick.AddListener(()=>OnLevelSelect(i));
             i++;
@@ -37,9 +38,10 @@ public class MenuScene : MonoBehaviour
         }
     }
     public void OnLevelSelect(int currentIndex){
+        Debug.Log("sexo");
+        Debug.Log(currentIndex);
         switch (currentIndex)
         {
-            
             default:
                 SceneManager.LoadScene("Novaborn");
                 break;
