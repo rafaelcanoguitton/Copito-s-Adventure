@@ -358,5 +358,9 @@ PrefabInstance:
       propertyPath: cantidadMoverse
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5501391596991701421, guid: fc701383121aecc48af8d70fb903cd42, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc701383121aecc48af8d70fb903cd42, type: 3}
