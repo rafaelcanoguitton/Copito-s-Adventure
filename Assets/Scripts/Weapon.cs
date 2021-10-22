@@ -49,6 +49,7 @@ public class Weapon : MonoBehaviour
         GameObject intantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         Rigidbody bulletRigid = intantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = bulletPos.forward * 50;
+
         yield return null;
         //2
         GameObject intantCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);

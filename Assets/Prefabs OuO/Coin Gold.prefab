@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5498536942895525038}
   - component: {fileID: 5498536942895525039}
   - component: {fileID: 5498536942895525037}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Coin Gold
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 169742326808875961}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.33, y: 1.5, z: -13.66}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6685041028788236467}
   - {fileID: 5498536943595853194}
@@ -63,7 +63,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &5498536942895525039
 SphereCollider:
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2131c440c8cd05b4ba9c57ef1fec9e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
   value: 100
 --- !u!1 &707941816680362600
 GameObject:
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6685041028788236467}
   - component: {fileID: 3605064341495022571}
   - component: {fileID: 1396578346140872072}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5498536943595853194}
   - component: {fileID: 5498536943595853195}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
