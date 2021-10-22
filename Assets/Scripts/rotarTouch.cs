@@ -20,7 +20,7 @@ public class rotarTouch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0 && script_personaje.estado=='N') {
+        if (Input.touchCount > 0) {
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved) {
                 rotacionY = Quaternion.Euler(
