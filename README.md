@@ -37,3 +37,5 @@ As mentioned before UnityHub will take care of everything and after these steps 
 ## Demo
 
 Here's a video demo of the current stage of our game/application:
+<!-- https://youtu.be/NJJ-VRA7VlM -->
+[![Demo Copito's Adventure](https://img.youtube.com/vi/NJJ-VRA7VlM/0.jpg)](http://www.youtube.com/watch?v=NJJ-VRA7VlM)
