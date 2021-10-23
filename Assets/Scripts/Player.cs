@@ -50,10 +50,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         
-        GetInput();
-        Move();
-        Turn();
-        Jump();
+        // GetInput();
+        // Move();
+        // Turn();
+        // Jump();
         
         Atack();
         Swap();
