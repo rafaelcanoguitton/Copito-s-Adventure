@@ -1,6 +1,6 @@
 # Copito's Adventure
 
-<img title="" src="IMG_1168.PNG" alt="" width="271" style="float: left;">This repository contains the Computer Human Interaction (**CS2H1**) class at ***Universidad Católica San Pablo's*** semester assignment. The core of the assignment is to implement an application/game which makes use of concepts and topics reviewed in class.
+<img title="" align="left" src="IMG_1168.PNG" alt="" width="271" style="float: left;">This repository contains the Computer Human Interaction (**CS2H1**) class at ***Universidad Católica San Pablo's*** semester assignment. The core of the assignment is to implement an application/game which makes use of concepts and topics reviewed in class.
 
 Our approach was to make an isometric low-ply style game that could be played using voice controls and used Augmented Reality. We considered gameplay, enemies, items, level progression and many other concepts.
 
