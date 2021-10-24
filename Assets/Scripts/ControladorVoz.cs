@@ -22,7 +22,7 @@ public class ControladorVoz : MonoBehaviour
         //plugin
         plugin = SpeechRecognizerPlugin.GetPlatformPluginVersion(this.gameObject.name);
         //configuraciones
-        plugin.SetLanguageForNextRecognition("es-ES");
+        plugin.SetLanguageForNextRecognition("es-PE");
         plugin.SetMaxResultsForNextRecognition(2);
         plugin.SetContinuousListening(true);
         plugin.StartListening();
