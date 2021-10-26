@@ -49,12 +49,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
-        // GetInput();
-        // Move();
-        // Turn();
-        // Jump();
-        
+        /*
+        GetInput();
+        Move();
+        Turn();
+        Jump();
+        */
         Atack();
         Swap();
 
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
     {
         if (jDown && !isJump && !isSwap)
         {
-            Debug.Log("Saltando");
+            
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Debug.Log("Floor");
+            //Debug.Log("Floor");
             anim.SetBool("isJump", false);
             isJump = false;
         }
@@ -246,12 +246,14 @@ public class Player : MonoBehaviour
             switch (item.type)
             {
                 case Item.Type.Coin:
+                    //Debug.Log("MONEDA");
                     coin += item.value;
                     if (coin > maxCoin)
                         coin = maxCoin;
                     break;
 
                 case Item.Type.Heart:
+                    //Debug.Log("Corazon");
                     health += item.value;
                     if (health > maxHealth)
                         health = maxHealth;
@@ -265,7 +267,6 @@ public class Player : MonoBehaviour
         {
             Item item = other.GetComponent<Item>();
             int weaponIndex = item.value;
-            Debug.Log(item.value);
             hasWeapon[weaponIndex] = true;
             Destroy(other.gameObject);
         }

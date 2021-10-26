@@ -44,10 +44,14 @@ public class Enemy : MonoBehaviour
 
         else if (other.tag == "Bullet" && type == Type.Enemigo)
         {
+            
             Bullet bullet = other.GetComponent<Bullet>();
             currHealth -= bullet.damage;
-            Vector3 reactVec = transform.position = other.transform.position;
-            Destroy(other.gameObject);
+            //Modificado debido a que cambiaba la posicion del enemigo
+            //Vector3 reactVec = transform.position = other.transform.position;
+            Vector3 reactVec = other.transform.position;
+            if (currHealth<0)
+                Destroy(other.gameObject);
             StartCoroutine(OnDamage(reactVec));
         }
     }
@@ -55,8 +59,9 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
+        Debug.Log("Colision bala");
         mat.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         if(currHealth > 0) {
             mat.color = Color.white;
@@ -67,9 +72,10 @@ public class Enemy : MonoBehaviour
             mat.color = Color.gray;
             gameObject.layer = 12;
 
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5, ForceMode.Impulse);            
+            //comentado porque se sale del mapa
+            //reactVec = reactVec.normalized;
+            //reactVec += Vector3.up;
+            //rigid.AddForce(reactVec * 5, ForceMode.Impulse);            
 
             Destroy(gameObject, 1);
         }
