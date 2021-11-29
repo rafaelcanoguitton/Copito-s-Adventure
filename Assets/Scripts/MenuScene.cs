@@ -32,6 +32,9 @@ public class MenuScene : MonoBehaviour
             case 1:
                 desiredMenuPosition=Vector3.left*1920;
                 break;
+            case 2:
+                desiredMenuPosition=Vector3.right*1920;
+                break;
             default:
                 desiredMenuPosition=Vector3.zero;
                 break;
@@ -63,5 +66,8 @@ public class MenuScene : MonoBehaviour
     }
     public void onBack(){
         NavigateTo(0);
+    }
+    public void onMultiplayerClick(){
+        NavigateTo(2);
     }
 }
