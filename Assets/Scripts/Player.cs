@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public GameObject[] weapon;
-    private bool[] hasWeapon;
+    public bool[] hasWeapon;
 
     public int ammo;
     public int coin;
