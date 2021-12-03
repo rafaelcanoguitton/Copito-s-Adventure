@@ -13,30 +13,40 @@ public class Item : NetworkBehaviour
     public GameObject personaje=null;
     private Player script_personaje;
     //-----------------------
-    public NetworkVariable<bool> vivo=new NetworkVariable<bool>();
+    public NetworkVariable<bool> vivo=new NetworkVariable<bool>(true);
+    public override void OnNetworkSpawn(){
+        if(IsOwner){
+            Debug.Log("host");
+        }
+        else{
+            Debug.Log("client");
+        }
+    }
     void Start()
     {
         if(personaje)
-            script_personaje = personaje.GetComponent<Player>();
+                script_personaje = personaje.GetComponent<Player>();        
     }
     void OnMouseDown(){
         
-        if (!NetworkManager.Singleton.IsServer){//client
-            Debug.Log("cf");
+        if (IsOwner){//host 
             if(type==Type.Weapon){
                 script_personaje.hasWeapon[value] = true;
                 vivo.Value=false;
                 //Destroy(this.gameObject);
+                SubmitPositionRequestServerRpc();
             }
         }
     }
-    
-
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         transform.Rotate(Vector3.up * 20 * Time.deltaTime);
-        if(vivo.Value==false)
+        if(!vivo.Value){
             Destroy(this.gameObject);
+        }
+    }
+    [ServerRpc]
+    void SubmitPositionRequestServerRpc(ServerRpcParams rpcParams = default){
+        vivo.Value = false;
     }
 }

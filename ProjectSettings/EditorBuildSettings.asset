@@ -23,9 +23,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Escenas premium/Nivel2.unity
     guid: 10cccdd5589f5b449b424a1d0040b3f5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Escenas premium/Lab nivel 1 - Completo.unity
     guid: 6159123c380fe09449826ad29b054ecf
+  - enabled: 1
+    path: Assets/Escenas premium/INTENTO RED.unity
+    guid: d441ba451ff37c130a8e83841adb1090
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: ea636d91e8ec9164aa617bc9b388493d, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 2af163106fc3f6e498f0599ec346aed2, type: 2}
