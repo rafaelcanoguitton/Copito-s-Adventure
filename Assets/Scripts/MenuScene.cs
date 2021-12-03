@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UNET;
 using UnityEngine.UI;
+
 
 public class MenuScene : MonoBehaviour
 {
+    public Text _WaitingText;
     // Start is called before the first frame update
     private CanvasGroup fadeGroup;
     private float fadeInSpeed=0.33f;
@@ -35,18 +39,31 @@ public class MenuScene : MonoBehaviour
             case 2:
                 desiredMenuPosition=Vector3.right*1920;
                 break;
+            case 3:
+                desiredMenuPosition=Vector3.right*1920*2;
+                _WaitingText.text= "Esperando a cliente...";
+                //Debug.Log(NetworkManager.Singleton.IsServer);
+                //Debug.Log(NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+                //NetworkManager.Singleton.StartHost();
+                break;
+            case 4:
+                desiredMenuPosition=Vector3.right*1920*2;
+                _WaitingText.text="Esperando a host...";
+                //Temporarily using a fixed ip
+                //NetworkManager.Singleton.StartClient();
+                //NetworkManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = "127.0.0.1";
+                break;
             default:
                 desiredMenuPosition=Vector3.zero;
                 break;
         }
     }
     public void OnLevelSelect(int currentIndex){
-        Debug.Log("sexo");
         Debug.Log(currentIndex);
         switch (currentIndex)
         {
             default:
-                SceneManager.LoadScene("Novaborn");
+                SceneManager.LoadScene("Lab nivel 1 - Completo");
                 break;
         }
         
@@ -69,5 +86,11 @@ public class MenuScene : MonoBehaviour
     }
     public void onMultiplayerClick(){
         NavigateTo(2);
+    }
+    public void onMultiplayerHost(){
+        NavigateTo(3);
+    }
+    public void onMultiplayerClient(){
+        NavigateTo(4);
     }
 }
