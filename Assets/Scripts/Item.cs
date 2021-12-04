@@ -4,6 +4,28 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Unity.Netcode;
 
+public class Item : MonoBehaviour
+{
+    public enum Type { Coin, Heart, Weapon, Key };
+    public Type type;
+    public int value;
+    //-----------------------------------------------------
+    void Start(){
+    
+    }
+    //-----------------------------------------------------
+    void Update(){
+        transform.Rotate(Vector3.up * 20 * Time.deltaTime);            
+    }
+}
+
+/*
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+using Unity.Netcode;
+
 public class Item : NetworkBehaviour
 {
     public enum Type { Coin, Heart, Weapon, Key };
@@ -28,16 +50,17 @@ public class Item : NetworkBehaviour
                 script_personaje = personaje.GetComponent<Player>();        
     }
     void OnMouseDown(){
-        
-        if (IsOwner){//host 
-            if(type==Type.Weapon){
-                script_personaje.hasWeapon[value] = true;
-                vivo.Value=false;
-                //Destroy(this.gameObject);
-                SubmitPositionRequestServerRpc();
-            }
+        if(type==Type.Weapon){
+            script_personaje.hasWeapon[value] = true;
+            //vivo.Value=false;
+            SubmitPositionRequestServerRpc();
+                
         }
     }
+    void OnMouseUp(){
+
+    }
+
     // Update is called once per frame
     void Update(){
         transform.Rotate(Vector3.up * 20 * Time.deltaTime);
@@ -45,8 +68,10 @@ public class Item : NetworkBehaviour
             Destroy(this.gameObject);
         }
     }
-    [ServerRpc]
+    [ClientRpc]
     void SubmitPositionRequestServerRpc(ServerRpcParams rpcParams = default){
         vivo.Value = false;
     }
 }
+
+*/

@@ -300,7 +300,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1147791377}
-    PlayerPrefab: {fileID: 1554746786}
+    PlayerPrefab: {fileID: 0}
     NetworkPrefabs: []
     TickRate: 30
     ClientConnectionBufferTimeout: 10
@@ -675,11 +675,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985571812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba29648a701bc9cb93a04c8ebff6b6b, type: 3}
+  m_Script: {fileID: 11500000, guid: ede7b542c7564d1c4847edde4ce6b1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vivo:
+    m_InternalValue: 1
 --- !u!114 &1985571819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +695,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 978166530
-  AlwaysReplicateAsRoot: 1
+  AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
