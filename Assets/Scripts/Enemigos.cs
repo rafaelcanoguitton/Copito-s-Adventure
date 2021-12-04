@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Enemigos : MonoBehaviour
+using Unity.Netcode;
+public class Enemigos : NetworkBehaviour
 {
     [SerializeField]
     float speed = 0.5f;
@@ -28,16 +28,21 @@ public class Enemigos : MonoBehaviour
 
     void Start()
     {
-        departTarget = startPoint;
-        destinationTarget = endPoint;
-
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(departTarget.position, destinationTarget.position);
-        rigid = GetComponent<Rigidbody>();
-        boxCollider = GetComponent<BoxCollider>();
-        mat =GetComponentInChildren<MeshRenderer>().material ;
+        
     }
 
+    public override void OnNetworkSpawn(){
+        if(IsOwner){
+            departTarget = startPoint;
+            destinationTarget = endPoint;
+
+            startTime = Time.time;
+            journeyLength = Vector3.Distance(departTarget.position, destinationTarget.position);
+            rigid = GetComponent<Rigidbody>();
+            boxCollider = GetComponent<BoxCollider>();
+            mat =GetComponentInChildren<MeshRenderer>().material ;
+        }
+    }
 
     void FixedUpdate()
     {
