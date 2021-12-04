@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Player : MonoBehaviour
+using Unity.Netcode;
+public class Player : NetworkBehaviour
 {
     public float speed;
     public GameObject[] weapon;
@@ -58,10 +58,12 @@ public class Player : MonoBehaviour
         
         Atack();
         Swap();
-
-        //control voz
+        //if(IsOwned){
         moverse();
         saltar();
+        //}
+        //control voz
+        
 
     }
     #region Movimiento por voz

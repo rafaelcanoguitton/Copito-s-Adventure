@@ -4,38 +4,44 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Unity.Netcode;
 
 using static SpeechRecognizerPlugin;
 
-public class ControladorVoz : MonoBehaviour
+public class ControladorVoz : NetworkBehaviour
 {
     private Player script_personaje;
     public GameObject personaje;
     public float cantidadMoverse;
     private SpeechRecognizerPlugin plugin = null;
     //public Text uiTexto;
-    void Start()
-    {
-        //uiTexto.text = personaje.transform.position.ToString();
-        //script Player
-        script_personaje = personaje.GetComponent<Player>();
-        //plugin
-        plugin = SpeechRecognizerPlugin.GetPlatformPluginVersion(this.gameObject.name);
-        //configuraciones
-        plugin.SetLanguageForNextRecognition("es-PE");
-        plugin.SetMaxResultsForNextRecognition(2);
-        plugin.SetContinuousListening(true);
-        plugin.StartListening();
+    void Start(){
+        
+    }
+    public override void OnNetworkSpawn(){
+        if(IsOwner){
+            //script Player
+            script_personaje = personaje.GetComponent<Player>();
+            //plugin
+            plugin = SpeechRecognizerPlugin.GetPlatformPluginVersion(this.gameObject.name);
+            //configuraciones
+            plugin.SetLanguageForNextRecognition("es-PE");
+            plugin.SetMaxResultsForNextRecognition(2);
+            plugin.SetContinuousListening(true);
+            plugin.StartListening();
+        }
     }
     private void Update()
     {
         
         //uiTexto.text = personaje.transform.position.ToString();
     }
+    /*
     private void OnDestroy()
     {
         plugin.StopListening(); 
     }
+    */
     public void OnResult(string recognizedResult)
     {
         char[] delimiterChars = { '~' };
