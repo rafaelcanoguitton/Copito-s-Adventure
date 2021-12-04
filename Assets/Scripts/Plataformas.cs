@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
-public class Plataformas : MonoBehaviour
+using Unity.Netcode;
+public class Plataformas : NetworkBehaviour
 {
 
     [SerializeField]
@@ -12,7 +13,7 @@ public class Plataformas : MonoBehaviour
     [SerializeField]
     Transform startPoint, endPoint;
 
-    bool activador=false;
+    
 
     [SerializeField]
     float changeDirectionDelay=0.0f;
@@ -27,26 +28,39 @@ public class Plataformas : MonoBehaviour
     bool isWaiting;
 
     #region  MOVER
-    public UnityEvent upEvent;
-    public UnityEvent downEvent;
-
-
-    float distancia_arreglada=0.02f;
+    public NetworkVariable<bool> activador=new NetworkVariable<bool>();
+    public float distancia_arreglada =0.02f;
     void OnMouseDown(){
-        if(activador){
-            return;
+        if(!IsOwner){
+            if(activador.Value){
+                return;
+            }
+            ActivarPlataformaServerRpc(true);
         }
-        activador=true;
+        //activador.Value=true;
     }   
     
     void OnMouseUp(){
-        activador=false;
+        ActivarPlataformaServerRpc(false);
+        //activador.Value=false;
+    }
+
+    public override void OnNetworkSpawn(){
+        if(IsOwner){//host
+            //Debug.Log("host");
+        }
+        else{//client
+            //Debug.Log("client");
+        }
     }
     
     #endregion
 
     void Start()
     {
+        
+
+        activador.Value=false;
         departTarget = startPoint;
         destinationTarget = endPoint;
 
@@ -54,14 +68,11 @@ public class Plataformas : MonoBehaviour
         journeyLength = Vector3.Distance(departTarget.position, destinationTarget.position);
     }
 
-    void FixedUpdate()
-    {
-        if(activador){
+    void FixedUpdate(){
+        
+        if(activador.Value){
             Move();
-        }
-        
-        
-            
+        } 
     }
 
     private void Move()
@@ -83,6 +94,7 @@ public class Plataformas : MonoBehaviour
             {
                 isWaiting = true;
                 StartCoroutine(changeDelay());
+
             }
         }
 
@@ -130,6 +142,19 @@ public class Plataformas : MonoBehaviour
             other.transform.parent = null;
         }
     }
+
+    [ServerRpc(RequireOwnership =false)]//cliente->servidor
+    void ActivarPlataformaServerRpc(bool estadoPlataforma){
+        //Debug.Log("ENVIANDO");
+        activador.Value=estadoPlataforma;
+        ActivarPlataformaClientRpc(estadoPlataforma);
+        
+    }
+    [ClientRpc]//servidor->cliente
+    void ActivarPlataformaClientRpc(bool estadoPlataforma){
+        activador.Value=estadoPlataforma;
+    }
+
 }
 
 /*using System.Collections;

@@ -140,6 +140,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba29648a701bc9cb93a04c8ebff6b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &155286805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155286798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 92644036
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &353749196 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6631938066963619806, guid: 0664ba70e8b7dcf4589d8187d9e02b86, type: 3}
@@ -196,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1950832229122446650, guid: 0664ba70e8b7dcf4589d8187d9e02b86, type: 3}
       propertyPath: changeDirectionDelay
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1950832229122446650, guid: 0664ba70e8b7dcf4589d8187d9e02b86, type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.size
@@ -682,6 +698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vivo:
     m_InternalValue: 1
+  personaje: {fileID: 353749196}
+  value: 1
 --- !u!114 &1985571819
 MonoBehaviour:
   m_ObjectHideFlags: 0
