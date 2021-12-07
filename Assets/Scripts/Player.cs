@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
+//public class Player : MonoBehaviour
 public class Player : NetworkBehaviour
 {
     public float speed;
@@ -51,28 +52,40 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
-        
+        /*
         GetInput();
         Move();
         Turn();
         Jump();
-        
-        Atack();
-        Swap();
-        //if(IsOwned){
-        moverse();
-        saltar();
-        //}
-        //control voz
-        
-
+        */
+        if(NetworkManager.Singleton.IsServer){
+            Atack();
+            Swap();
+            moverse();
+            saltar();
+            rotar();
+        }
     }
     #region Movimiento por voz
+    private void rotar(){
+        if(estado=='I'){//izquierda
+            transform.Rotate(0, -90, 0);
+            estado='N';
+        }
+        if(estado=='D'){//izquierda
+            transform.Rotate(0, 90, 0);
+            estado='N';
+        }
+        if(estado=='A'){//izquierda
+            transform.Rotate(0, 180, 0); 
+            estado='N';
+        }
+        
+    }
     private void moverse()
     {
         if (estado == 'M')
         {
-
             objetivoMoverse = transform.position + transform.TransformDirection(objetivoMoverse);
             estado = 'c';
         }

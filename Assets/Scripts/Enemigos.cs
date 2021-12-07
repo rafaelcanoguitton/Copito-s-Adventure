@@ -28,7 +28,7 @@ public class Enemigos : NetworkBehaviour
 
     void Start()
     {
-        
+        isWaiting=true;
     }
 
     public override void OnNetworkSpawn(){
@@ -41,18 +41,21 @@ public class Enemigos : NetworkBehaviour
             rigid = GetComponent<Rigidbody>();
             boxCollider = GetComponent<BoxCollider>();
             mat =GetComponentInChildren<MeshRenderer>().material ;
+            isWaiting=false;
         }
     }
-
+    
     void FixedUpdate()
     {
-        Move();
+        if (!isWaiting)
+            Move();
     }
+    
     #region Movimiento
     private void Move()
     {
-        if (!isWaiting)
-        {
+        //if (!isWaiting)
+        //{
             if (Vector3.Distance(transform.position, destinationTarget.position) > 0.01f)
             {
                 float distCovered = (Time.time - startTime) * speed;
@@ -67,7 +70,7 @@ public class Enemigos : NetworkBehaviour
                 isWaiting = true;
                 StartCoroutine(changeDelay());
             }
-        }
+        //}
 
 
     }

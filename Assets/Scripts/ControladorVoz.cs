@@ -16,32 +16,31 @@ public class ControladorVoz : NetworkBehaviour
     private SpeechRecognizerPlugin plugin = null;
     //public Text uiTexto;
     void Start(){
-        
+        script_personaje = personaje.GetComponent<Player>();
+        //plugin
+        plugin = SpeechRecognizerPlugin.GetPlatformPluginVersion(this.gameObject.name);
+        //configuraciones
+        plugin.SetLanguageForNextRecognition("es-PE");
+        plugin.SetMaxResultsForNextRecognition(2);
+        plugin.SetContinuousListening(true);
+        plugin.StartListening();
     }
     public override void OnNetworkSpawn(){
-        if(IsOwner){
+        //if(IsOwner){
             //script Player
-            script_personaje = personaje.GetComponent<Player>();
-            //plugin
-            plugin = SpeechRecognizerPlugin.GetPlatformPluginVersion(this.gameObject.name);
-            //configuraciones
-            plugin.SetLanguageForNextRecognition("es-PE");
-            plugin.SetMaxResultsForNextRecognition(2);
-            plugin.SetContinuousListening(true);
-            plugin.StartListening();
-        }
+            
+        //}
     }
     private void Update()
-    {
-        
+    {   
         //uiTexto.text = personaje.transform.position.ToString();
     }
-    /*
+    
     private void OnDestroy()
     {
         plugin.StopListening(); 
     }
-    */
+    
     public void OnResult(string recognizedResult)
     {
         char[] delimiterChars = { '~' };
@@ -55,13 +54,16 @@ public class ControladorVoz : NetworkBehaviour
                     script_personaje.estado = 'M';
                     break;
                 case "izquierda":
-                    personaje.transform.Rotate(0,-90,0);
+                    script_personaje.estado = 'I';
+                    //personaje.transform.Rotate(0,-90,0);
                     break;
                 case "derecha":
-                    personaje.transform.Rotate(0, 90, 0);
+                    script_personaje.estado = 'D';
+                    //personaje.transform.Rotate(0, 90, 0);
                     break;
                 case "atrás":
-                    personaje.transform.Rotate(0, 180, 0);
+                    script_personaje.estado = 'A';
+                    //personaje.transform.Rotate(0, 180, 0);
                     break;
                 case "salta":
                     script_personaje.objetivoMoverse = new Vector3(0, 0, cantidadMoverse);
