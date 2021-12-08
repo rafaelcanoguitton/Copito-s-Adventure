@@ -36,3 +36,4 @@ sysinfo.txt
 *.unitypackage
 Logs
 UserSettings/EditorUserSettings.asset
+ProjectSettings/ProjectSettings.asset
