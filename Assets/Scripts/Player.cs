@@ -42,6 +42,7 @@ public class Player : NetworkBehaviour
     //control voz
     public Vector3 objetivoMoverse;
     public char estado = 'N';
+    public NetworkVariable<char> state_animacion;
     public float angulo_salto;
     void Awake()
     {
@@ -52,19 +53,28 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
+        //Controlar por teclado
         /*
+        state_animacion.Value='N';
         GetInput();
         Move();
         Turn();
         Jump();
         */
+        //Controlar por teclado
+        //Controlar por voz
+        
+        AnimacionServerRpc(estado);
         if(NetworkManager.Singleton.IsServer){
             Atack();
             Swap();
             moverse();
             saltar();
             rotar();
+            AnimacionesRed();
         }
+        
+        //Controlar por voz
     }
     #region Movimiento por voz
     private void rotar(){
@@ -87,19 +97,19 @@ public class Player : NetworkBehaviour
         if (estado == 'M')
         {
             objetivoMoverse = transform.position + transform.TransformDirection(objetivoMoverse);
-            estado = 'c';
+            estado = 'C';
         }
-        if (estado == 'c')
+        if (estado == 'C')
         {
             if (transform.position.x != objetivoMoverse.x && transform.position.z != objetivoMoverse.z)
             {
                 transform.position = Vector3.MoveTowards(transform.position,
                     objetivoMoverse, speed * Time.deltaTime);
-                anim.SetBool("isRun", true);
+                //anim.SetBool("isRun", true);
             }
             else
             {
-                anim.SetBool("isRun", false);
+                //anim.SetBool("isRun", false);
                 estado = 'N';
             }
         }
@@ -112,8 +122,8 @@ public class Player : NetworkBehaviour
             objetivoMoverse = transform.position + transform.TransformDirection(objetivoMoverse * 2);
 
             rigid.velocity = BallisticVelocity(objetivoMoverse, angulo_salto);
-            anim.SetBool("isJump", true);
-            anim.SetTrigger("doJump");
+            //anim.SetBool("isJump", true);
+            //anim.SetTrigger("doJump");
             estado = 'N';
 
         }
@@ -150,14 +160,18 @@ public class Player : NetworkBehaviour
     void Move()
     {
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-
         if (isSwap)
             moveVec = Vector3.zero;
 
         //if (!isBorder)
         transform.position += moveVec * speed * Time.deltaTime;
-
-        anim.SetBool("isRun", moveVec != Vector3.zero);
+        /*
+        if(moveVec != Vector3.zero)
+            state_animacion.Value='C';
+        */
+        //anim.SetBool("isRun", moveVec != Vector3.zero);
+        //
+        //ActivarAnimMoveServerRpc();
     }
 
 
@@ -172,8 +186,9 @@ public class Player : NetworkBehaviour
         {
             
             rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
-            anim.SetBool("isJump", true);
-            anim.SetTrigger("doJump");
+            //state_animacion.Value='S';
+            //anim.SetBool("isJump", true);
+            //anim.SetTrigger("doJump");
             isJump = true;
         }
     }
@@ -239,6 +254,22 @@ public class Player : NetworkBehaviour
         isBorder = Physics.Raycast(transform.position, transform.forward, 5, LayerMask.GetMask("Wall"));
     }*/
 
+    void AnimacionesRed(){
+        switch(state_animacion.Value){
+            case 'C':
+                anim.SetBool("isRun", true);
+            break;
+            case 'S':
+                anim.SetBool("isJump", true);
+                anim.SetTrigger("doJump");
+            break;
+            case 'N':
+                anim.SetBool("isRun", false);
+                anim.SetBool("isJump", false);
+                break;
+        }
+    }
+
     void fixedUpdate()
     {
         FreezeRotation();
@@ -288,9 +319,13 @@ public class Player : NetworkBehaviour
             Destroy(other.gameObject);
         }
     }
-
-
+    //------------------------------------------------------------------
+    [ServerRpc(RequireOwnership =false)]//cliente->servidor
+    void AnimacionServerRpc(char estado_animacion){
+        state_animacion.Value=estado_animacion;
+    }
 }
+
 /*
 using System.Collections;
 using System.Collections.Generic;

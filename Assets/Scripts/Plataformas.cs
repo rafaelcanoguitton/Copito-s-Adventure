@@ -31,7 +31,7 @@ public class Plataformas : NetworkBehaviour
     public NetworkVariable<bool> activador=new NetworkVariable<bool>();
     public float distancia_arreglada =0.02f;
     void OnMouseDown(){
-        if(!IsOwner){
+        if(!NetworkManager.Singleton.IsServer){
             if(activador.Value){
                 return;
             }
