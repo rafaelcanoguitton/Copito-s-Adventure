@@ -11,7 +11,7 @@ public class REDES_ARMAS : NetworkBehaviour
     private Player script_personaje;
     public int value;
     public override void OnNetworkSpawn(){
-        if(IsOwner){
+        if(NetworkManager.Singleton.IsServer){
             Debug.Log("host");
             if(personaje)
                 script_personaje = personaje.GetComponent<Player>(); 
@@ -21,7 +21,7 @@ public class REDES_ARMAS : NetworkBehaviour
         }
     }
     void OnMouseDown(){
-        if(!IsOwner)//si es cliente
+        if(!NetworkManager.Singleton.IsServer)//si es cliente
             shootServerRpc();
     }
     void Start(){
