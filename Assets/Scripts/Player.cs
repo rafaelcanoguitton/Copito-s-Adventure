@@ -54,16 +54,16 @@ public class Player : NetworkBehaviour
     void Update()
     {
         //Controlar por teclado
-        /*
+        
         state_animacion.Value='N';
         GetInput();
         Move();
         Turn();
         Jump();
-        */
+        
         //Controlar por teclado
         //Controlar por voz
-        
+        /*
         AnimacionServerRpc(estado);
         if(NetworkManager.Singleton.IsServer){
             Atack();
@@ -73,7 +73,7 @@ public class Player : NetworkBehaviour
             rotar();
             AnimacionesRed();
         }
-        
+        */
         //Controlar por voz
     }
     #region Movimiento por voz
