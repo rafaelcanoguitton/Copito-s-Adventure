@@ -23,13 +23,14 @@ public class ControladorVoz : NetworkBehaviour
         plugin.SetLanguageForNextRecognition("es-PE");
         plugin.SetMaxResultsForNextRecognition(2);
         plugin.SetContinuousListening(true);
-        plugin.StartListening();
     }
-    public override void OnNetworkSpawn(){
-        //if(IsOwner){
-            //script Player
+   public override void OnNetworkSpawn(){
+        if(NetworkManager.Singleton.IsServer){
+            Debug.Log("empezando a escuchar");
+            plugin.StartListening();
+        }
             
-        //}
+        
     }
     private void Update()
     {   
